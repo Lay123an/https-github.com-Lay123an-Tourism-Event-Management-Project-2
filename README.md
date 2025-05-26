@@ -1,7 +1,7 @@
 Tourism Website Project
 
 This project is part of CS1250 - Software Engineering 1 at Al-Imam University.
-The goal is to develop a tourism website where users can view places, log in, and navigate through touristic information.
+The goal is to develop a tourism website where users can view log in, places, and navigate through touristic information.
 
 -------
 Phase 3 Features
