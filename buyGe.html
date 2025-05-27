@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Ticket - eSports Tournament</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url("b.jpg"); /* غيرها حسب اسم الخلفية */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .card {
+      max-width: 700px;
+      background-color: white;
+      margin: 60px auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .header {
+      background-color: #f39c12;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .info {
+      padding: 20px;
+      line-height: 1.8;
+    }
+    .info strong { color: #333; }
+    .form-section {
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .price {
+      font-size: 20px;
+      color: #e67e22;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #e67e22;
+    }
+    @media (max-width: 600px) {
+      .card { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">eSports Tournament</div>
+    <div class="info">
+      <p><strong>Date:</strong> October 5, 2025</p>
+      <p><strong>Time:</strong> 12:00 PM – 9:00 PM</p>
+      <p><strong>Location:</strong> Riyadh Gaming Arena</p>
+      <p><strong>Description:</strong> Watch top gamers battle it out in a high-energy eSports tournament featuring your favorite titles. Enjoy live commentary, giveaways, and an electrifying crowd atmosphere!</p>
+      <p class="price"><strong>Price:</strong> 100 SAR per ticket</p>
+    </div>
+    <div class="form-section">
+      <form action="#" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="tickets">Number of Tickets</label>
+        <select id="tickets" name="tickets" required>
+          <option value="1">1 Ticket</option>
+          <option value="2">2 Tickets</option>
+          <option value="3">3 Tickets</option>
+          <option value="4">4 Tickets</option>
+        </select>
+
+        <button type="submit">Confirm Purchase</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

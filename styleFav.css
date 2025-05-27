@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: url('b.jpg');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 40px;
+  width: 70px;
+  background-color: #FAB972;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  z-index: 2;
+}
+
+.sidebar .home-icon {
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.sidebar .home-icon i {
+  color: white;
+}
+
+
+
+.icon {
+  font-size: 24px;
+  color: white;
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #FAB972;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+.heart {
+  font-size: 20px;
+  color: white;
+}
+
+.main-content {
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 240, 207);
+  padding: 30px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.event {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.date-box {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #779acf;
+  text-align: center;
+  margin-right: 20px;
+  color: #779acf;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.day {
+  font-size: 18px;
+}
+
+.month {
+  font-size: 12px;
+}
+
+.details h3 {
+  margin-bottom: 10px;
+}
+
+.details p {
+  font-size: 14px;
+  color: #333;
+}
+
+.details a {
+  color: #779acf;
+  text-decoration: none;
+  font-size: 14px;
+}
