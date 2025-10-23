@@ -5,44 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gatherly Login</title>
   <link rel="stylesheet" href="stayl.css">
-  
 </head>
 <body>
   <div class="login-container">
     <h2>Log in</h2>
+
     <input type="text" id="username" placeholder="user name" />
     <input type="password" id="password" placeholder="password" />
+
     <div class="remmber-me">
-        <label>
-            Remmber me
-        </label>
-        <input type="checkbox" id="checkbox" placeholder="checkbox">
+      <label>Remmber me</label>
+      <input type="checkbox" id="checkbox">
     </div>
+
     <a href="#">forget your password ?</a>
-    <button onclick="login()">log in</button>
+    <button id="loginBtn">log in</button>
+
+    <!-- الكابتشا -->
+    <div id="captchaSection" style="display:none; margin-top:10px;">
+      <p id="captchaQuestion" style="font-weight:bold;"></p>
+      <input type="text" id="captchaAnswer" placeholder="Answer here" style="margin-top:5px;">
+      <p id="captchaError" style="color:red;font-size:0.9em;"></p>
+    </div>
+
     <div class="bottom-text">
       Don't have an account? <a href="#">sign in</a>
     </div>
   </div>
 
   <script>
-    function login() {
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
+      //إعادة تعيين المحاولات في كل مرة تُفتح الصفحة
+  localStorage.setItem('failedAttempts', '0');
+    const MAX_ATTEMPTS = 3;  // الحد الأقصى قبل الكابتشا
+    const MAX_TOTAL_ATTEMPTS = 4; // المحاولة الرابعة بعد الكابتشا فقط
+    let failedAttempts = parseInt(localStorage.getItem('failedAttempts') || '0', 10);
+    let captchaAnswer = '';
+    let captchaRequired = false; // هل يجب حل الكابتشا
+  // 🧹 Reset attempts after some time (مثلاً بعد مرور يوم)
+const lastReset = localStorage.getItem('lastReset');
+const now = Date.now();
 
-       if(user!==""&&pass!==""){
-       alert("Welcome,"+ user +" You are now logged in")
-      window.location.href="index.html"
-    }else{
-        alert(`Please enter both name and password`);
+// إذا مرت أكثر من 24 ساعة من آخر محاولة، نرجع العدّ
+if (!lastReset || now - parseInt(lastReset, 10) > 24 * 60 * 60 * 1000) {
+  localStorage.setItem('failedAttempts', '0');
+  localStorage.setItem('lastReset', now.toString());
+  failedAttempts = 0;
+}
+
+    // 🔹 إنشاء الكابتشا
+    function showCaptcha() {
+      const a = Math.floor(Math.random() * 10);
+      const b = Math.floor(Math.random() * 10);
+      captchaAnswer = String(a + b);
+      document.getElementById('captchaQuestion').textContent = `What is ${a} + ${b}?`;
+      document.getElementById('captchaSection').style.display = 'block';
+      document.getElementById('captchaError').textContent = '';
+      captchaRequired = true;
+    }
+
+    // 🔹 التحقق من تسجيل الدخول
+    function handleLogin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const captchaInput = document.getElementById('captchaAnswer').value.trim();
+      const captchaError = document.getElementById('captchaError');
+
+      // إذا تجاوز المستخدم الحد الأقصى الكامل (4)
+      if (failedAttempts >= MAX_TOTAL_ATTEMPTS) {
+        alert("❌ You have exceeded the allowed attempts.\nPlease use 'Forget your password?' to reset your account.");
+        return;
+      }
+
+      // تحقق من الحقول
+      if (username === '' || password === '') {
+        alert('Please enter both username and password.');
+        return;
+      }
+
+      // إذا الكابتشا مطلوبة
+      if (captchaRequired) {
+        if (captchaInput !== captchaAnswer) {
+          captchaError.textContent = '❌ Incorrect CAPTCHA. Try again.';
+          return;
+        } else {
+          captchaError.textContent = '';
+        }
+      }
+
+      // بيانات الدخول التجريبية
+      const validUser = 'imamm@imamm.com';
+      const validPassword = '1234';
+
+      // التحقق من صحة البيانات
+      if (username === validUser && password === validPassword) {
+        alert(`✅ Welcome back, ${username}!`);
+        localStorage.setItem('failedAttempts', '0');
+        failedAttempts = 0;
+        captchaRequired = false;
+        document.getElementById('captchaSection').style.display = 'none';
+        window.location.href = 'index.html';
+      } else {
+        failedAttempts++;
+        localStorage.setItem('failedAttempts', failedAttempts);
+
+        //  قبل الكابتشا
+        if (failedAttempts < MAX_ATTEMPTS) {
+          alert(`Invalid username or password. (${failedAttempts}/${MAX_ATTEMPTS})`);
         }
 
-      
+        //  عند الوصول للمحاولة الثالثة
+        else if (failedAttempts === MAX_ATTEMPTS) {
+          alert("⚠️ You’ve reached the maximum attempts.\nPlease solve the question below to try one last time.");
+          showCaptcha();
+        }
+
+        // ❌ (المحاولة الرابعه)
+        else if (failedAttempts === MAX_TOTAL_ATTEMPTS) {
+          alert("❌ Wrong password again.\nPlease use 'Forget your password?' to reset your account.");
+        }
+      }
     }
-  
-   
+
+    //  عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('loginBtn').addEventListener('click', handleLogin);
+      if (failedAttempts >= MAX_ATTEMPTS && failedAttempts < MAX_TOTAL_ATTEMPTS) {
+        showCaptcha();
+      }
+    });
   </script>
 </body>
 </html>
 
+</html>
+
  
+
