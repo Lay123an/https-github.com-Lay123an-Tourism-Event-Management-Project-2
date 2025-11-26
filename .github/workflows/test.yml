@@ -12,5 +12,5 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Run simple test
-      run: echo "PASS"
+    - name: Run Functional Tests
+      run: node test.js
